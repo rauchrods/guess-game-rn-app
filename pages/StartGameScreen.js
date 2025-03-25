@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import PrimaryButton from "../components/PrimaryButton";
 
@@ -15,14 +15,8 @@ const StartGameScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        // keyboardType="decimal-pad"
-        style={styles.input}
-        value={inputNumber}
-        onChangeText={(input) => onInputChange(input)}
-        placeholder="Enter Any Number"
-      />
+    <View style={styles.inputContainer}>
+      <TextInput />
       <PrimaryButton>Reset</PrimaryButton>
       <PrimaryButton>Confirm</PrimaryButton>
     </View>
@@ -32,13 +26,21 @@ const StartGameScreen = () => {
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
+  inputContainer: {
+    padding: 16,
+    backgroundColor: "#72063c",
+    marginTop: 50,
+    marginHorizontal: 24,
+    borderRadius: 10,
+    elevation: 8,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 2,
+      height: 4,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 6,
     alignItems: "center",
-    justifyContent: "center",
-    borderColor: "red",
-    borderWidth: 1,
   },
   input: {
     height: 40,
