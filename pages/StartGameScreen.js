@@ -3,22 +3,35 @@ import React, { useState } from "react";
 import PrimaryButton from "../components/PrimaryButton";
 
 const StartGameScreen = () => {
-  const [inputNumber, setInputNumber] = useState(1);
+  const [inputNumber, setInputNumber] = useState("1");
 
   const onInputChange = (input) => {
-    if (typeof input == "number") {
-      setInputNumber(input);
-      return;
-    } else {
-      console.log("Please enter a number no text allowed");
-    }
+    setInputNumber(input);
+  };
+
+  const onResetHandler = () => {
+    setInputNumber("1");
   };
 
   return (
     <View style={styles.inputContainer}>
-      <TextInput />
-      <PrimaryButton>Reset</PrimaryButton>
-      <PrimaryButton>Confirm</PrimaryButton>
+      <TextInput
+        style={styles.numberInput}
+        maxLength={2}
+        keyboardType="number-pad"
+        onChangeText={onInputChange}
+        value={inputNumber}
+      />
+      <View style={styles.buttonsContainer}>
+        <View style={{ flex: 1 }}>
+          <PrimaryButton onPress={onResetHandler}>Reset</PrimaryButton>
+        </View>
+        <View style={{ flex: 1 }}>
+          <PrimaryButton>Confirm</PrimaryButton>
+        </View>
+      </View>
+
+      <Text>{inputNumber}</Text>
     </View>
   );
 };
@@ -42,12 +55,22 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     alignItems: "center",
   },
-  input: {
+  numberInput: {
     height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    width: "auto",
+    width: 50,
+    fontSize: 32,
+    borderBottomColor: "#ddb52f",
+    borderBottomWidth: 2,
+    color: "#ddb52f",
+    marginVertical: 10,
+    fontWeight: "bold",
     textAlign: "center",
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    // borderBlockColor: "#ddb52f",
+    // borderWidth: 2,
+    width: "100%",
+    justifyContent: "space-between",
   },
 });
