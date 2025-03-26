@@ -17,21 +17,21 @@ export default function App() {
       colors={["#4e0329", "#9c0550", "#e07b50", "#ddb52f"]}
       style={styles.linearGradient}
     >
-      <SafeAreaView style={styles.rootScreen}>
-        <StatusBar style="light" />
-        <ImageBackground
-          source={require("./assets/images/background.png")}
-          resizeMode="cover"
-          style={styles.rootScreen}
-          imageStyle={{ opacity: 0.15 }}
-        >
+      <StatusBar style="light" />
+      <ImageBackground
+        source={require("./assets/images/background.png")}
+        resizeMode="cover"
+        style={styles.rootScreen}
+        imageStyle={{ opacity: 0.15 }}
+      >
+        <SafeAreaView style={styles.rootScreen}>
           {userNumber ? (
             <GameScreen />
           ) : (
             <StartGameScreen onConfirm={onConfirmHandler} />
           )}
-        </ImageBackground>
-      </SafeAreaView>
+        </SafeAreaView>
+      </ImageBackground>
     </LinearGradient>
   );
 }
