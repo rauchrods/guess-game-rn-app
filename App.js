@@ -4,13 +4,32 @@ import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 import GameScreen from "./pages/GameScreen";
 import { useState } from "react";
+import GameOverScreen from "./pages/GameOverScreen";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
 
+  const [gameIsOver, setGameIsOver] = useState(true);
+
   const onConfirmHandler = (inputNumber) => {
     setUserNumber(inputNumber);
+    setGameIsOver(false);
   };
+
+  let screen = <StartGameScreen onConfirm={onConfirmHandler} />;
+
+  if (userNumber) {
+    screen = (
+      <GameScreen
+        userNumber={userNumber}
+        onGameOver={() => setGameIsOver(true)}
+      />
+    );
+  }
+
+  if (gameIsOver && userNumber) {
+    screen = <GameOverScreen />;
+  }
 
   return (
     <LinearGradient
@@ -24,13 +43,7 @@ export default function App() {
         style={styles.rootScreen}
         imageStyle={{ opacity: 0.15 }}
       >
-        <SafeAreaView style={styles.rootScreen}>
-          {userNumber ? (
-            <GameScreen userNumber={userNumber}/>
-          ) : (
-            <StartGameScreen onConfirm={onConfirmHandler} />
-          )}
-        </SafeAreaView>
+        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );
