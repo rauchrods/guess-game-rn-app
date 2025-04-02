@@ -3,13 +3,25 @@ import StartGameScreen from "./pages/StartGameScreen";
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 import GameScreen from "./pages/GameScreen";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GameOverScreen from "./pages/GameOverScreen";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import AppLoading from "expo-app-loading";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
 
   const [gameIsOver, setGameIsOver] = useState(true);
+
+  const [loaded, error] = useFonts({
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+  });
+
+  if (!loaded && !error) {
+    return <AppLoading />;
+  }
 
   const onConfirmHandler = (inputNumber) => {
     setUserNumber(inputNumber);

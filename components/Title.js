@@ -17,5 +17,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "white",
     padding: 10,
+    fontFamily: "open-sans-bold",
   }
 });

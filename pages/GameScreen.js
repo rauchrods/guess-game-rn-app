@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import Title from "../components/Title";
 import NumberContainer from "../components/NumberContainer";
 import PrimaryButton from "../components/PrimaryButton";
+import colors from "../utils/constants/colors";
+import { Ionicons } from "@expo/vector-icons";
 
 function generateRandomBetween(min, max, exclude) {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -12,7 +14,6 @@ function generateRandomBetween(min, max, exclude) {
     return rndNum;
   }
 }
-
 
 let minBoundary = 1;
 let maxBoundary = 100;
@@ -57,15 +58,23 @@ const GameScreen = ({ userNumber, onGameOver }) => {
     <View style={styles.screen}>
       <Title>Oponent's Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <View>
-        <Text>Higher or Lower?</Text>
-        <View>
-          <PrimaryButton onPress={() => nextGuessHandler("greater")}>
-            +
-          </PrimaryButton>
-          <PrimaryButton onPress={() => nextGuessHandler("lower")}>
-            -
-          </PrimaryButton>
+      <View style={styles.inputContainer}>
+        <Text style={styles.instructionText}>Higher or Lower?</Text>
+        <View style={styles.buttonsContainer}>
+          <View style={{ flex: 1 }}>
+            <PrimaryButton onPress={() => nextGuessHandler("greater")}>
+              <Ionicons name="add-circle" size={24} color={colors.primary500} />
+            </PrimaryButton>
+          </View>
+          <View style={{ flex: 1 }}>
+            <PrimaryButton onPress={() => nextGuessHandler("lower")}>
+              <Ionicons
+                name="remove-circle-sharp"
+                size={24}
+                color={colors.primary500}
+              />
+            </PrimaryButton>
+          </View>
         </View>
       </View>
     </View>
@@ -78,5 +87,32 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 15,
+  },
+
+  instructionText: {
+    color: colors.accent500,
+    fontSize: 22,
+  },
+  inputContainer: {
+    padding: 16,
+    backgroundColor: colors.primary500,
+    marginTop: 40,
+    marginHorizontal: 24,
+    borderRadius: 10,
+    elevation: 8,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 2,
+      height: 4,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 6,
+    alignItems: "center",
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    marginVertical: 10,
+    // borderWidth: 2,
+    // width: 150,
   },
 });

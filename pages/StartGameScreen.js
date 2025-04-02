@@ -9,6 +9,7 @@ import {
 import React, { useState } from "react";
 import PrimaryButton from "../components/PrimaryButton";
 import colors from "../utils/constants/colors";
+import Title from "../components/Title";
 
 const StartGameScreen = ({ onConfirm }) => {
   const [inputNumber, setInputNumber] = useState("");
@@ -36,24 +37,26 @@ const StartGameScreen = ({ onConfirm }) => {
   };
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.numberInput}
-        maxLength={2}
-        keyboardType="numbers-and-punctuation"
-        onChangeText={onInputChange}
-        value={inputNumber}
-      />
-      <View style={styles.buttonsContainer}>
-        <View style={{ flex: 1 }}>
-          <PrimaryButton onPress={onResetHandler}>Reset</PrimaryButton>
-        </View>
-        <View style={{ flex: 1 }}>
-          <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
+    <View style={styles.rootContaimer}>
+      <Title>Guess My Number</Title>
+      <View style={styles.inputContainer}>
+        <Text style={styles.instructionText}>Enter A Number</Text>
+        <TextInput
+          style={styles.numberInput}
+          maxLength={2}
+          keyboardType="numbers-and-punctuation"
+          onChangeText={onInputChange}
+          value={inputNumber}
+        />
+        <View style={styles.buttonsContainer}>
+          <View style={{ flex: 1 }}>
+            <PrimaryButton onPress={onResetHandler}>Reset</PrimaryButton>
+          </View>
+          <View style={{ flex: 1 }}>
+            <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
+          </View>
         </View>
       </View>
-
-      <Text>{inputNumber}</Text>
     </View>
   );
 };
@@ -61,10 +64,15 @@ const StartGameScreen = ({ onConfirm }) => {
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
+  rootContaimer: {
+    flex: 1,
+    alignItems: "center",
+    marginVertical: 100,
+  },
   inputContainer: {
     padding: 16,
     backgroundColor: colors.primary500,
-    marginTop: 50,
+    marginTop: 40,
     marginHorizontal: 24,
     borderRadius: 10,
     elevation: 8,
@@ -87,6 +95,10 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontWeight: "bold",
     textAlign: "center",
+  },
+  instructionText: {
+    color: colors.accent500,
+    fontSize: 22,
   },
   buttonsContainer: {
     flexDirection: "row",
