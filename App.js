@@ -6,13 +6,14 @@ import GameScreen from "./pages/GameScreen";
 import { useEffect, useState } from "react";
 import GameOverScreen from "./pages/GameOverScreen";
 import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
 import AppLoading from "expo-app-loading";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
 
   const [gameIsOver, setGameIsOver] = useState(true);
+
+  const [guessRounds, setGuessRounds] = useState(0);
 
   const [loaded, error] = useFonts({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
@@ -40,7 +41,17 @@ export default function App() {
   }
 
   if (gameIsOver && userNumber) {
-    screen = <GameOverScreen />;
+    screen = (
+      <GameOverScreen
+        userNumber={userNumber}
+        roundsNumber={guessRounds}
+        onRestart={() => {
+          setUserNumber(null);
+          setGameIsOver(true);
+          setGuessRounds(0);
+        }}
+      />
+    );
   }
 
   return (
