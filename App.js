@@ -29,14 +29,22 @@ export default function App() {
     setGameIsOver(false);
   };
 
+  const onGameOverHandler = (rounds) => {
+    setGameIsOver(true);
+    setGuessRounds(rounds);
+  };
+
+  const restartGameHandler = () => {
+    setUserNumber(null);
+    setGameIsOver(true);
+    setGuessRounds(0);
+  };
+
   let screen = <StartGameScreen onConfirm={onConfirmHandler} />;
 
   if (userNumber) {
     screen = (
-      <GameScreen
-        userNumber={userNumber}
-        onGameOver={() => setGameIsOver(true)}
-      />
+      <GameScreen userNumber={userNumber} onGameOver={onGameOverHandler} />
     );
   }
 
@@ -45,11 +53,7 @@ export default function App() {
       <GameOverScreen
         userNumber={userNumber}
         roundsNumber={guessRounds}
-        onRestart={() => {
-          setUserNumber(null);
-          setGameIsOver(true);
-          setGuessRounds(0);
-        }}
+        onRestart={restartGameHandler}
       />
     );
   }
