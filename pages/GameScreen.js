@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 15,
+    alignItems: "center",
   },
 
   instructionText: {
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     padding: 16,
     backgroundColor: colors.primary500,
-    marginTop: 40,
+    marginTop: 20,
     marginHorizontal: 24,
     borderRadius: 10,
     elevation: 8,

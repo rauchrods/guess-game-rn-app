@@ -1,5 +1,6 @@
 import {
   Alert,
+  Dimensions,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -63,7 +64,10 @@ const StartGameScreen = ({ onConfirm }) => {
 
 export default StartGameScreen;
 
+const deviceHeight = Dimensions.get("window").height;
+
 const styles = StyleSheet.create({
+  
   rootContaimer: {
     flex: 1,
     alignItems: "center",
